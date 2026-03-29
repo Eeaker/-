@@ -1,0 +1,3 @@
+[submodule "third_party/basketball_analysis"]
+	path = third_party/basketball_analysis
+	url = https://github.com/abdullahtarek/basketball_analysis.git
