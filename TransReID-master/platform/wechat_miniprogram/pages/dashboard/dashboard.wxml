@@ -1,0 +1,35 @@
+<view class="container dashboard-container">
+  <view class="welcome-section">
+    <text class="greeting">系统监控 (Engine Status)</text>
+    <text class="sub-greeting">BallShow 核心 AI 集群状态实时视图</text>
+  </view>
+
+  <view class="stats-grid">
+    <view class="stat-card">
+      <text class="stat-title">GPU 状态</text>
+      <text class="stat-value highlight {{gpuStatus === 'Online' ? 'success' : 'error'}}">{{gpuStatus}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-title">已载入特征数量 (Gallery)</text>
+      <text class="stat-value">{{stats.model_info.gallery_size || 0}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-title">双模型 Rank-1</text>
+      <text class="stat-value text-orange">{{stats.rank1 || '94.4%'}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-title">双模型 mAP</text>
+      <text class="stat-value text-orange">{{stats.map || '91.8%'}}</text>
+    </view>
+  </view>
+
+  <!-- Future ECharts Container placeholder -->
+  <view class="premium-card chart-card">
+    <view class="card-header">
+      <text class="card-title">模型特征聚类分布</text>
+    </view>
+    <view class="chart-container">
+      <canvas type="2d" id="clusterCanvas" class="cluster-canvas"></canvas>
+    </view>
+  </view>
+</view>

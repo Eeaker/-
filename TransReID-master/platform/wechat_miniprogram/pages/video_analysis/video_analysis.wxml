@@ -1,0 +1,119 @@
+<view class="container video-container">
+  
+  <!-- Step 1: Uploads -->
+  <view class="solid-card" wx:if="{{activeStep === 0}}">
+    <view class="header">
+      <text class="title">引擎输入流 (Inputs)</text>
+      <text class="subtitle">第一步：配置检索目标与待分析的比赛录像，请确保视频时长低于 60 秒</text>
+    </view>
+
+    <!-- Target Person Upload -->
+    <text class="section-label">检索目标 (Target Player)</text>
+    <block wx:if="{{!targetImageUrl}}">
+      <view class="upload-box small-box" bindtap="chooseTargetImage">
+        <text class="upload-icon">+</text>
+        <text class="upload-text">选取目标球员照片</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="upload-box small-box">
+        <image class="preview-img" src="{{targetImageUrl}}" mode="aspectFit" catchtap="previewTargetImage"></image>
+      </view>
+      <view class="reselect-btn" catchtap="chooseTargetImage">↻ 重新选取照片</view>
+    </block>
+
+    <!-- Target Video Upload -->
+    <text class="section-label mt-30">比赛录像 (Match Video)</text>
+    <block wx:if="{{!videoUrl}}">
+      <view class="upload-box small-box" bindtap="chooseVideo">
+        <text class="upload-icon"></text>
+        <text class="upload-text">选取视频片段 (最高压缩率)</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="upload-box small-box">
+        <video class="preview-video" src="{{videoUrl}}" controls show-center-play-btn show-fullscreen-btn object-fit="contain"></video>
+      </view>
+      <view class="reselect-btn" catchtap="chooseVideo">↻ 重新选取视频</view>
+    </block>
+
+    <button 
+      class="premium-btn mt-40 {{loading ? 'loading' : ''}}" 
+      hover-class="premium-btn-hover" 
+      bindtap="submitAnalysis">
+      <text wx:if="{{!loading}}">提交引擎阵列 (Submit)</text>
+      <text wx:else>文件上传中...</text>
+    </button>
+  </view>
+
+  <!-- Step 2: Processing Board -->
+  <view class="solid-card processing-card" wx:elif="{{activeStep === 1}}">
+    <view class="header">
+      <text class="title">引擎解析中 (Processing)</text>
+      <text class="subtitle">YOLOv8 与 ViT-ReID 联合阵列正在提取逐帧光流信息</text>
+    </view>
+    
+    <view class="progress-box">
+      <view class="progress-track">
+        <view class="progress-fill" style="width: {{progress}}%"></view>
+      </view>
+      <text class="progress-text">{{progress}}%</text>
+    </view>
+    <view class="status-log">
+      <text class="log-text blink">>> 任务 ID: {{taskId}}</text>
+      <text class="log-text">>> 安全机制：云端分析防杀已启动，可切出微信...</text>
+      <text class="log-text">>> {{taskStatus}} ...</text>
+    </view>
+    <button class="cancel-btn" catchtap="resetAnalysis">放弃等待，重新上传 (Cancel)</button>
+  </view>
+
+  <!-- Step 3: Result Playback - video MUST be outside any positioned ancestor for native fullscreen -->
+  <block wx:if="{{activeStep === 2}}">
+    <!-- Video player is a direct child of .container, NO position:relative ancestors -->
+    <video 
+      id="highlightVideo" 
+      class="result-video" 
+      src="{{resultVideoUrl}}" 
+      controls 
+      autoplay
+      show-fullscreen-btn
+      show-center-play-btn
+      enable-progress-gesture
+      object-fit="contain"
+      binderror="onVideoError">
+    </video>
+
+    <view class="solid-card result-card">
+      <view class="header">
+        <text class="title">分析报告 (Highlights)</text>
+        <text class="subtitle">点击下方动作图谱，引擎将自动调度视频帧</text>
+      </view>
+      
+      <!-- 时间轴 -->
+      <view class="timeline">
+        <text class="section-label mt-30">智能动作流 (Action Stream)</text>
+        <view wx:if="{{matches.length === 0}}" class="empty-matches">未检测到该球员的高光时刻</view>
+        
+        <scroll-view scroll-y class="matches-list">
+          <view 
+            class="match-item" 
+            wx:for="{{matches}}" 
+            wx:key="time" 
+            bindtap="playSegment" 
+            data-start="{{item.time}}">
+            
+            <view class="time-badge">{{item.formatted_time || item.start_str || '00:00'}}</view>
+            <view class="match-info">
+              <text class="match-desc">持续 {{item.duration || '--'}}s · {{item.frame_count || '--'}} 帧</text>
+              <text class="match-score">置信度: {{item.score_percent}}%</text>
+            </view>
+            <image wx:if="{{item.crop_path}}" class="crop-img" src="{{baseUrl}}{{item.crop_path}}" mode="aspectFill"></image>
+          </view>
+        </scroll-view>
+      </view>
+      
+      <button class="premium-btn mt-40" hover-class="premium-btn-hover" bindtap="resetAnalysis">返回重试 (Restart)</button>
+    </view>
+  </block>
+
+</view>

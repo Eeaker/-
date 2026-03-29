@@ -1,0 +1,80 @@
+<view class="container trajectory-history-page">
+  <view class="header">
+    <text class="title">{{texts.title}}</text>
+    <text class="subtitle">{{texts.subtitle}}</text>
+  </view>
+
+  <view wx:if="{{loading && list.length === 0}}" class="center-state">
+    <text>{{texts.loading}}</text>
+  </view>
+
+  <view wx:else>
+    <scroll-view class="task-scroll" scroll-y>
+      <view wx:for="{{list}}" wx:key="id" class="task-card {{selectedTaskId === item.id ? 'active' : ''}}" data-id="{{item.id}}" bindtap="onTaskTap">
+        <view class="task-top">
+          <text class="task-id">{{texts.taskPrefix}}{{item.id}}</text>
+          <text class="task-status {{item.status}}">{{item.statusLabel}}</text>
+        </view>
+        <text class="task-date">{{item.created_at || '--'}}</text>
+        <view class="task-metrics">
+          <text>{{texts.detected}} {{item.metrics.detected_points || 0}}</text>
+          <text>{{texts.coverage}} {{item.metrics.coverage_percent || 0}}%</text>
+        </view>
+        <text class="task-shot">{{texts.shotPrediction}} {{item.shotLabel}}</text>
+      </view>
+
+      <button wx:if="{{page < totalPages}}" class="load-more" bindtap="loadMore">{{texts.loadMore}}</button>
+    </scroll-view>
+
+    <view class="detail-panel">
+      <view wx:if="{{detailLoading}}" class="center-state">
+        <text>{{texts.loadingDetail}}</text>
+      </view>
+
+      <view wx:elif="{{!detail}}" class="center-state">
+        <text>{{texts.selectHint}}</text>
+      </view>
+
+      <view wx:else>
+        <view class="shot-card">
+          <text class="shot-title">{{texts.shotPrediction}}：{{detailShotView.label}}</text>
+          <text class="shot-desc">{{detailShotView.detail}}</text>
+        </view>
+        <view class="metric-grid">
+          <view class="metric-item">
+            <text class="metric-label">{{texts.detectorMode}}</text>
+            <text class="metric-value">{{detailTracking.detector_mode || '--'}}</text>
+          </view>
+          <view class="metric-item">
+            <text class="metric-label">{{texts.detectedPoints}}</text>
+            <text class="metric-value">{{detailMetrics.detected_points || 0}}</text>
+          </view>
+          <view class="metric-item">
+            <text class="metric-label">{{texts.predictedPoints}}</text>
+            <text class="metric-value">{{detailMetrics.predicted_points || 0}}</text>
+          </view>
+          <view class="metric-item">
+            <text class="metric-label">{{texts.continuity}}</text>
+            <text class="metric-value">{{detailMetrics.continuity_percent || 0}}%</text>
+          </view>
+        </view>
+
+        <video wx:if="{{videoUrl}}" id="trajectoryHistoryVideo" class="result-video" src="{{videoUrl}}" controls enable-progress-gesture object-fit="contain"></video>
+
+        <view wx:if="{{!videoUrl}}" class="empty-video">
+          {{texts.videoPending}}
+        </view>
+
+        <view class="point-list" wx:if="{{pointSamples.length > 0}}">
+          <view wx:for="{{pointSamples}}" wx:key="index" class="point-item" data-time="{{item.time}}" bindtap="onPointTap">
+            <text class="point-time">{{item.timeLabel}}</text>
+            <view class="point-main">
+              <text class="point-line">{{item.kindLabel}}&#28857; X:{{item.x}} Y:{{item.y}} {{texts.frameLabel}}:{{item.frame}}</text>
+              <text class="point-line sub">{{texts.speedLabel}} {{item.speed_px_s}} &#20687;&#32032;/&#31186;</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

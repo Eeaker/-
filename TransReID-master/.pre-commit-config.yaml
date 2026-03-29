@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: miniprogram-no-bom
+        name: MiniProgram UTF-8 no BOM check
+        entry: python platform/wechat_miniprogram/tools/check_no_bom.py
+        language: system
+        pass_filenames: false

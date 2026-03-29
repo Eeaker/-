@@ -1,0 +1,107 @@
+/**app.wxss**/
+page {
+  /* Hermes Orange Premium Palette */
+  --primary-color: #E86321;
+  --primary-light: #FF8F54;
+  --primary-dark: #C24A10;
+
+  /* Dark Mode Variables */
+  --bg-base: #0D0D12;
+  --bg-overlay: #15161C;
+  --bg-overlay-glass: rgba(21, 22, 28, 0.7);
+  --text-main: #FCFCFD;
+  --text-secondary: #8B8E98;
+  --border-color: #23262F;
+
+  /* Neomorphic / Glassmorphism Shadows */
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 20px 40px rgba(232, 99, 33, 0.15);
+
+  /* Layout styling */
+  --radius-lg: 32rpx;
+  --radius-md: 24rpx;
+  --radius-sm: 16rpx;
+  
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  box-sizing: border-box;
+}
+
+@keyframes gradientBreath {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  min-height: 100vh;
+  padding: 30rpx;
+  background: linear-gradient(-45deg, #0D0D12, rgba(232, 99, 33, 0.1), #0D0D12, rgba(232, 99, 33, 0.05));
+  background-size: 400% 400%;
+  animation: gradientBreath 20s ease infinite;
+}
+
+/* Common Premium Layouts */
+.premium-card {
+  background: rgba(21, 22, 28, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.6);
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.solid-card {
+  background: var(--bg-overlay);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.6);
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.premium-card::before, .solid-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, rgba(232, 99, 33, 0.4), transparent);
+}
+
+.reselect-btn {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 26rpx;
+  padding: 16rpx 0;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+  border: 1px dashed rgba(232, 99, 33, 0.3);
+  border-radius: var(--radius-md);
+  background: rgba(232, 99, 33, 0.05);
+}
+
+.premium-btn {
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8rpx 24rpx rgba(232, 99, 33, 0.3);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.premium-btn-hover {
+  background: var(--primary-light);
+  transform: scale(0.98);
+}

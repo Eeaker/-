@@ -1,0 +1,38 @@
+<view class="container mine-page">
+  <view class="premium-card user-card">
+    <view class="user-row">
+      <view class="avatar">{{avatarLetter}}</view>
+      <view class="user-text">
+        <text class="name">{{displayName}}</text>
+        <text class="sub">{{texts.userLabel}}{{displayUsername}}</text>
+      </view>
+    </view>
+    <button class="logout-btn" bindtap="logout">{{texts.logout}}</button>
+  </view>
+
+  <view class="section-head">
+    <text class="title">{{texts.sectionTitle}}</text>
+    <text class="sub">{{texts.sectionSub}}</text>
+  </view>
+
+  <view class="entry-grid">
+    <view class="premium-card entry-card" bindtap="goHighlightHistory">
+      <view class="entry-top">
+        <text class="entry-title">{{texts.highlightTitle}}</text>
+        <text class="entry-count">{{highlightCount}}</text>
+      </view>
+      <text class="entry-desc">{{texts.highlightDesc}}</text>
+      <view class="entry-btn"><text>{{texts.open}}</text></view>
+    </view>
+
+    <view class="premium-card entry-card" bindtap="goTrajectoryHistory">
+      <view class="entry-top">
+        <text class="entry-title">{{texts.trajectoryTitle}}</text>
+        <text class="entry-count trajectory">{{trajectoryCount}}</text>
+      </view>
+      <text class="entry-desc">{{texts.trajectoryDesc}}</text>
+      <view class="entry-btn trajectory"><text>{{texts.open}}</text></view>
+    </view>
+  </view>
+</view>
+

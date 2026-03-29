@@ -1,0 +1,37 @@
+<view class="container history-container">
+  <view class="head">
+    <text class="title">{{texts.title}}</text>
+    <text class="sub">{{texts.subtitle}}</text>
+  </view>
+
+  <view wx:if="{{loading && list.length === 0}}" class="center-state">
+    <text>{{texts.loading}}</text>
+  </view>
+
+  <view wx:elif="{{list.length === 0}}" class="center-state">
+    <text class="empty-text">{{texts.empty}}</text>
+  </view>
+
+  <view wx:else class="history-list">
+    <view class="premium-card history-card" wx:for="{{list}}" wx:key="id">
+      <view class="task-header">
+        <text class="task-type type-video">{{texts.title}}</text>
+        <text class="task-date">{{item.date}}</text>
+      </view>
+      <view class="task-body">
+        <text class="task-desc">{{texts.taskPrefix}}{{item.id}}</text>
+        <view class="task-meta-row">
+          <text class="meta-item">{{texts.frameLabel}}{{item.totalFrames}}</text>
+          <text class="meta-item">{{texts.segmentLabel}}{{item.matchedSegments}}</text>
+        </view>
+        <text class="task-status {{item.status === 'completed' ? 'text-success' : 'text-pending'}}">
+          {{item.statusLabel}}
+        </text>
+      </view>
+      <view wx:if="{{item.hasHighlight}}" class="highlight-btn" bindtap="openHighlight" data-item="{{item}}">
+        <text class="highlight-btn-text">{{texts.play}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+

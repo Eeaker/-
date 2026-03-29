@@ -1,0 +1,142 @@
+.mine-page {
+  padding-bottom: 40rpx;
+}
+
+.user-card {
+  margin-bottom: 22rpx;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 43rpx;
+  background: rgba(232, 99, 33, 0.22);
+  color: #ff9b65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-right: 18rpx;
+}
+
+.user-text .name {
+  display: block;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.user-text .sub {
+  display: block;
+  color: #9fa7ba;
+  font-size: 22rpx;
+  margin-top: 6rpx;
+}
+
+.logout-btn {
+  margin-top: 16rpx;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 35rpx;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 25rpx;
+}
+
+.logout-btn::after {
+  border: none;
+}
+
+.section-head {
+  margin: 8rpx 0 18rpx 0;
+}
+
+.section-head .title {
+  display: block;
+  color: #e86321;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.section-head .sub {
+  display: block;
+  margin-top: 6rpx;
+  color: #8f97aa;
+  font-size: 23rpx;
+}
+
+.entry-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.entry-card {
+  padding: 20rpx;
+}
+
+.entry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.entry-title {
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.entry-count {
+  min-width: 56rpx;
+  height: 56rpx;
+  border-radius: 28rpx;
+  text-align: center;
+  line-height: 56rpx;
+  color: #fff;
+  background: linear-gradient(135deg, #de5a1d, #f06d27);
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.entry-count.trajectory {
+  background: linear-gradient(135deg, #1d7adf, #27a3ff);
+}
+
+.entry-desc {
+  display: block;
+  color: #9ea7bb;
+  font-size: 23rpx;
+  line-height: 1.45;
+  min-height: 66rpx;
+}
+
+.entry-btn {
+  margin-top: 12rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  background: rgba(232, 99, 33, 0.16);
+  border: 1px solid rgba(232, 99, 33, 0.5);
+  color: #ffb07f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.entry-btn.trajectory {
+  background: rgba(39, 163, 255, 0.15);
+  border-color: rgba(39, 163, 255, 0.5);
+  color: #8ecfff;
+}

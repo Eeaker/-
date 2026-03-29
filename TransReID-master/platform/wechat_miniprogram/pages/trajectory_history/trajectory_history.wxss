@@ -1,0 +1,228 @@
+.trajectory-history-page {
+  padding-bottom: 30rpx;
+}
+
+.header {
+  margin-bottom: 18rpx;
+}
+
+.title {
+  display: block;
+  color: var(--primary-color);
+  font-size: 38rpx;
+  font-weight: 700;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 6rpx;
+  color: var(--text-secondary);
+  font-size: 24rpx;
+}
+
+.task-scroll {
+  max-height: 420rpx;
+}
+
+.task-card {
+  border-radius: 14rpx;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 14rpx;
+  margin-bottom: 10rpx;
+}
+
+.task-card.active {
+  border-color: rgba(232, 99, 33, 0.56);
+  background: rgba(232, 99, 33, 0.14);
+}
+
+.task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-id {
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.task-status {
+  font-size: 22rpx;
+  color: #9ea3b2;
+}
+
+.task-status.completed {
+  color: #4CAF50;
+}
+
+.task-status.processing,
+.task-status.pending {
+  color: var(--primary-light);
+}
+
+.task-status.failed,
+.task-status.cancelled {
+  color: #ff6d73;
+}
+
+.task-date {
+  display: block;
+  margin-top: 6rpx;
+  color: #9ea3b2;
+  font-size: 20rpx;
+}
+
+.task-metrics {
+  margin-top: 8rpx;
+  display: flex;
+  justify-content: space-between;
+  color: #d3d8e3;
+  font-size: 22rpx;
+}
+
+.task-shot {
+  display: block;
+  margin-top: 6rpx;
+  color: #bfc6d5;
+  font-size: 21rpx;
+}
+
+.load-more {
+  margin-top: 6rpx;
+  height: 62rpx;
+  line-height: 62rpx;
+  border-radius: 31rpx;
+  background: rgba(255, 255, 255, 0.08);
+  color: #d3d8e3;
+  font-size: 24rpx;
+}
+
+.load-more::after {
+  border: none;
+}
+
+.detail-panel {
+  margin-top: 14rpx;
+  border-radius: 16rpx;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14rpx;
+}
+
+.shot-card {
+  border-radius: 12rpx;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10rpx 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.shot-title {
+  display: block;
+  color: #ffb57b;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.shot-desc {
+  display: block;
+  margin-top: 4rpx;
+  color: #b7bfcd;
+  font-size: 21rpx;
+  line-height: 1.45;
+}
+
+.metric-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10rpx 0;
+  margin-bottom: 12rpx;
+}
+
+.metric-item {
+  width: 48%;
+  border-radius: 12rpx;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10rpx;
+}
+
+.metric-label {
+  display: block;
+  color: #9ea7b8;
+  font-size: 20rpx;
+}
+
+.metric-value {
+  display: block;
+  margin-top: 4rpx;
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.result-video {
+  width: 100%;
+  height: 320rpx;
+  border-radius: 12rpx;
+  margin-bottom: 10rpx;
+  background: #000;
+}
+
+.empty-video,
+.center-state {
+  height: 100rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ea3b2;
+  font-size: 24rpx;
+}
+
+.empty-video {
+  border: 1px dashed rgba(255,255,255,0.2);
+  margin-bottom: 10rpx;
+}
+
+.point-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.point-item {
+  border-radius: 12rpx;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  padding: 10rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.point-time {
+  min-width: 86rpx;
+  text-align: center;
+  color: #ff9b65;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.point-main {
+  flex: 1;
+}
+
+.point-line {
+  display: block;
+  color: #d3d8e3;
+  font-size: 22rpx;
+}
+
+.point-line.sub {
+  margin-top: 2rpx;
+  color: #9ca4b5;
+}

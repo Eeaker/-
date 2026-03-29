@@ -1,0 +1,52 @@
+<view class="container image-search-container">
+  <!-- Upload Section -->
+  <view class="premium-card upload-section">
+    <view class="header">
+      <text class="title">身份识别 (ID Re-ID)</text>
+      <text class="subtitle">上传球员截图，引擎将在千万级特征库中进行高精度匹配检索</text>
+    </view>
+    
+    <view class="upload-box" catchtap="onBoxTap">
+      <block wx:if="{{!previewUrl}}">
+        <view class="upload-placeholder">
+          <text class="upload-icon">+</text>
+          <text class="upload-text">点击拍摄或相册选择</text>
+        </view>
+      </block>
+      <block wx:else>
+        <image class="preview-img" src="{{previewUrl}}" mode="aspectFit"></image>
+      </block>
+    </view>
+    <view class="reselect-btn" wx:if="{{previewUrl}}" catchtap="chooseImage">↻ 重新选择图像</view>
+
+    <!-- Params Section -->
+    <view class="params-box" wx:if="{{previewUrl}}">
+      <view class="param-row">
+        <text class="label">检索数量 (Top-K)</text>
+        <slider min="10" max="100" value="{{topk}}" activeColor="#E86321" bindchange="onTopkChange" show-value/>
+      </view>
+      <button 
+        class="premium-btn {{loading ? 'loading' : ''}}" 
+        hover-class="premium-btn-hover" 
+        bindtap="submitSearch">
+        <text wx:if="{{!loading}}">启动 AI 引擎提取特征</text>
+        <text wx:else>引擎计算中，请稍候...</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- Results Section -->
+  <view class="premium-card results-section" wx:if="{{results.length > 0}}">
+    <view class="header">
+      <text class="title">匹配结果 (Top {{results.length}})</text>
+      <text class="subtitle">点击图片可进入系统级全屏高清预览，支持双指自由缩放</text>
+    </view>
+
+    <view class="waterfall">
+      <view class="result-item" wx:for="{{results}}" wx:key="index" bindtap="previewResult" data-index="{{index}}">
+        <image class="result-img" src="{{baseUrl}}{{item.path}}" mode="aspectFill" lazy-load="true"></image>
+        <view class="score-badge">相似度 {{item.score_percent}}%</view>
+      </view>
+    </view>
+  </view>
+</view>

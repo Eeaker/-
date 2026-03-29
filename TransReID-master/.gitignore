@@ -1,0 +1,31 @@
+﻿# Model and training artifacts
+logs/
+pretrain/
+*.pt
+*.pth
+*.bin
+
+# Runtime database and generated outputs
+*.db
+platform/backend/uploads/
+platform/backend/.hf_cache/
+platform/backend/.ultralytics_cfg/
+
+# Local dependency/vendor caches
+platform/backend/vendor/
+platform/backend/.pip_tmp/
+
+# Frontend local libs (CDN is used in index.html)
+platform/frontend/js/lib/
+platform/frontend/lib/
+
+# Temp/test scripts
+platform/backend/_tmp_*.py
+platform/backend/*_ab_test.py
+platform/backend/*_batch_eval.py
+
+# Python cache and system junk
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db

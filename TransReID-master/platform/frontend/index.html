@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BallShow ReID - 智能球员检索与高光生成</title>
+
+    <!-- Element Plus CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/theme-chalk/dark/css-vars.css">
+    <!-- ECharts -->
+    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Google Fonts for Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="dark">
+    <!-- Ambient Dynamic Background Orbs -->
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+
+    <!-- Vue 挂载点 -->
+    <div id="app" v-cloak></div>
+
+    <!-- Vue 3 & Vue Router Global Builds -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.3.0/dist/vue-router.global.js"></script>
+    <!-- Element Plus Global Build -->
+    <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+
+    <!-- 应用主入口，使用 module 模式加载 -->
+    <script type="module" src="./js/app.js?v=20260329b"></script>
+</body>
+
+</html>

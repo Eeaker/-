@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/dashboard/dashboard",
+    "pages/features/features",
+    "pages/image_search/image_search",
+    "pages/video_analysis/video_analysis",
+    "pages/history/history",
+    "pages/highlight_history/highlight_history",
+    "pages/trajectory_history/trajectory_history",
+    "pages/video_player/video_player"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#15161C",
+    "navigationBarTitleText": "BallShow AI",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0D0D12"
+  },
+  "tabBar": {
+    "color": "#8B8E98",
+    "selectedColor": "#E86321",
+    "backgroundColor": "#15161C",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/dashboard/dashboard",
+        "text": "\u4e3b\u9875"
+      },
+      {
+        "pagePath": "pages/features/features",
+        "text": "\u529f\u80fd"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "\u6211\u7684"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
+

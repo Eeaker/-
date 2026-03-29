@@ -1,0 +1,52 @@
+<!--
+  video_player.wxml
+  视频组件保持在页面主层级，避免影响原生全屏行为
+-->
+<view class="player-page">
+
+  <view wx:if="{{loading}}" class="center-state">
+    <text class="state-icon">加载中</text>
+    <text class="state-text">高光视频加载中，请稍候</text>
+  </view>
+
+  <view wx:elif="{{errorMsg}}" class="center-state">
+    <text class="state-icon">异常</text>
+    <text class="state-text">{{errorMsg}}</text>
+  </view>
+
+  <block wx:else>
+    <video
+      id="mainPlayer"
+      class="main-video"
+      src="{{videoUrl}}"
+      controls
+      autoplay
+      show-fullscreen-btn
+      show-center-play-btn
+      enable-progress-gesture
+      object-fit="contain"
+      binderror="onVideoError"
+    ></video>
+
+    <view class="segments-bar" wx:if="{{segments.length > 0}}">
+      <text class="bar-title">片段跳转</text>
+      <scroll-view scroll-x class="chips-row">
+        <view
+          class="chip"
+          wx:for="{{segments}}"
+          wx:key="time"
+          bindtap="seekTo"
+          data-start="{{item.time}}"
+        >
+          <text class="chip-time">{{item.formatted_time}}</text>
+          <text class="chip-score">{{item.score_percent}}%</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="info-bar">
+      <text class="info-text">任务 #{{taskId}} · 高光集锦</text>
+    </view>
+  </block>
+
+</view>

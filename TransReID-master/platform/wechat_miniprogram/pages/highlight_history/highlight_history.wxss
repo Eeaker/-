@@ -1,0 +1,117 @@
+.history-container {
+  padding-bottom: 40rpx;
+}
+
+.head {
+  margin-bottom: 18rpx;
+}
+
+.head .title {
+  display: block;
+  color: #e86321;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.head .sub {
+  display: block;
+  margin-top: 6rpx;
+  color: #9ea7bb;
+  font-size: 23rpx;
+}
+
+.center-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90rpx 0;
+  color: #9ea7bb;
+}
+
+.empty-text {
+  font-size: 28rpx;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.history-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14rpx;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.task-type {
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 6rpx 14rpx;
+  border-radius: 6rpx;
+}
+
+.type-video {
+  background: rgba(232, 99, 33, 0.2);
+  color: #ffab78;
+}
+
+.task-date {
+  font-size: 22rpx;
+  color: #9ea7bb;
+}
+
+.task-desc {
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.task-meta-row {
+  display: flex;
+  gap: 30rpx;
+  margin-top: 8rpx;
+}
+
+.meta-item {
+  font-size: 22rpx;
+  color: #9ea7bb;
+}
+
+.task-status {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+}
+
+.text-success {
+  color: #41b463;
+}
+
+.text-pending {
+  color: #ffab78;
+}
+
+.highlight-btn {
+  margin-top: 8rpx;
+  height: 72rpx;
+  border-radius: 36rpx;
+  background: linear-gradient(135deg, #de5a1d, #f06d27);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-btn-text {
+  color: #fff;
+  font-size: 27rpx;
+  font-weight: 700;
+}
+

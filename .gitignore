@@ -1,0 +1,27 @@
+# IDE and local metadata
+.idea/
+.vscode/
+
+# Large local artifacts and datasets
+data/
+_tmp_repo_basketball_analysis/
+*.mp4
+*.avi
+*.mov
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Model weights and training artifacts
+*.pt
+*.pth
+*.onnx
+*.bin
+
+# Python and runtime cache
+__pycache__/
+*.pyc
+
+# Keep current behavior for mobile app source
+TransReID-master/platform/mobile_app/

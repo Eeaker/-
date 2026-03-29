@@ -1,0 +1,13 @@
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+opencv-python>=4.8.0
+ultralytics>=8.0.0
+Pillow>=9.0.0
+numpy>=1.24.0
+torch>=1.7.1
+torchvision>=0.8.2
+yacs>=0.1.8
+timm>=0.4.12

@@ -1,0 +1,61 @@
+<view class="container login-container">
+  <view class="login-box">
+    <view class="logo-area">
+      <text class="logo-title">BallShow <text class="highlight">AI</text></text>
+      <text class="logo-subtitle">统一账号登录</text>
+    </view>
+
+    <view class="mode-tabs">
+      <view class="mode-tab {{mode === 'login' ? 'active' : ''}}" data-mode="login" bindtap="switchMode">登录</view>
+      <view class="mode-tab {{mode === 'register' ? 'active' : ''}}" data-mode="register" bindtap="switchMode">注册</view>
+    </view>
+
+    <view class="form-area">
+      <view class="input-group">
+        <text class="label">用户名</text>
+        <input
+          class="custom-input"
+          type="text"
+          placeholder="请输入用户名（默认 admin）"
+          placeholder-class="placeholder-style"
+          value="{{username}}"
+          bindinput="onUsernameInput"
+        />
+      </view>
+
+      <view class="input-group">
+        <text class="label">密码</text>
+        <input
+          class="custom-input"
+          type="password"
+          placeholder="请输入密码（默认 admin）"
+          placeholder-class="placeholder-style"
+          value="{{password}}"
+          bindinput="onPasswordInput"
+        />
+      </view>
+
+      <view class="input-group" wx:if="{{mode === 'register'}}">
+        <text class="label">昵称（可选）</text>
+        <input
+          class="custom-input"
+          type="text"
+          placeholder="请输入昵称（可不填）"
+          placeholder-class="placeholder-style"
+          value="{{nickname}}"
+          bindinput="onNicknameInput"
+        />
+      </view>
+
+      <button
+        class="premium-btn {{loading ? 'loading' : ''}}"
+        hover-class="premium-btn-hover"
+        bindtap="handleSubmit">
+        <text wx:if="{{!loading}}">{{mode === 'login' ? '登录' : '注册并登录'}}</text>
+        <text wx:else>{{mode === 'login' ? '登录中...' : '注册中...'}}</text>
+      </button>
+
+      <text class="default-tip">管理员账号：admin / admin</text>
+    </view>
+  </view>
+</view>

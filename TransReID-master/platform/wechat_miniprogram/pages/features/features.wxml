@@ -1,0 +1,173 @@
+<view class="container feature-page">
+  <view class="feature-header">
+    <text class="header-title">{{texts.headerTitle}}</text>
+    <text class="header-sub">{{texts.headerSub}}</text>
+  </view>
+
+  <view class="channel-wrap">
+    <scroll-view
+      class="channel-scroll"
+      scroll-x
+      scroll-with-animation
+      show-scrollbar="{{false}}"
+      scroll-left="{{navScrollLeft}}"
+      bindscroll="onNavScroll"
+      bindtouchstart="onNavTouchStart"
+      bindtouchmove="onNavTouchMove"
+      bindtouchend="onNavTouchEnd"
+      bindtouchcancel="onNavTouchCancel"
+    >
+      <view class="channel-track" style="padding-left: {{navSidePadding}}px; padding-right: {{navSidePadding}}px;">
+        <view
+          wx:for="{{navItems}}"
+          wx:key="key"
+          class="channel-item {{selectedIndex === index ? 'active' : ''}}"
+          style="width: {{navItemWidth}}px; margin-right: {{index === navItems.length - 1 ? 0 : navItemGap}}px;"
+          data-index="{{index}}"
+          bindtap="onNavTap"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class="channel-focus"></view>
+  </view>
+
+  <view class="feature-body">
+    <view wx:if="{{selectedIndex === 0}}" class="premium-card module-card">
+      <view class="module-head">
+        <text class="module-title">{{texts.imageTitle}}</text>
+        <text class="module-desc">{{texts.imageDesc}}</text>
+      </view>
+
+      <view class="row">
+        <button class="action-btn light compact-btn" bindtap="chooseImageQuery">{{texts.chooseImage}}</button>
+        <text class="status-text">{{imageQueryPath ? texts.imageSelected : texts.imageNotSelected}}</text>
+      </view>
+
+      <view wx:if="{{imageQueryPath}}" class="preview-shell" bindtap="previewImageQuery">
+        <image class="preview-image" src="{{imageQueryPath}}" mode="aspectFit" />
+      </view>
+
+      <view class="slider-row">
+        <text class="row-label">{{texts.topkPrefix}}{{imageTopk}}</text>
+        <slider min="10" max="100" value="{{imageTopk}}" activeColor="#E86321" block-color="#ffffff" bindchange="onTopkChange" />
+      </view>
+
+      <button class="action-btn primary" bindtap="submitImageSearch" loading="{{imageLoading}}">{{texts.startSearch}}</button>
+
+      <view wx:if="{{imageResults.length > 0}}" class="result-grid">
+        <view wx:for="{{imageResults}}" wx:key="index" class="result-item" data-index="{{index}}" bindtap="previewSearchResult">
+          <image class="result-image" src="{{item.fullUrl}}" mode="aspectFit" />
+          <text class="result-score">{{item.scorePercent}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{selectedIndex === 1}}" class="premium-card module-card">
+      <view class="module-head">
+        <text class="module-title">{{texts.highlightTitle}}</text>
+        <text class="module-desc">{{texts.highlightDesc}}</text>
+      </view>
+
+      <view class="upload-stack">
+        <view class="upload-block">
+          <button class="action-btn light block-btn" bindtap="chooseVideoTarget">{{texts.chooseTarget}}</button>
+          <text class="media-title">{{texts.targetLabel}}</text>
+          <view wx:if="{{videoTargetPath}}" class="media-content" bindtap="previewVideoTarget">
+            <image class="media-image" src="{{videoTargetPath}}" mode="aspectFit" />
+          </view>
+          <view wx:else class="media-placeholder">{{texts.targetEmpty}}</view>
+        </view>
+
+        <view class="upload-block">
+          <button class="action-btn light block-btn" bindtap="chooseVideoFile">{{texts.chooseVideo}}</button>
+          <text class="media-title">{{texts.videoLabel}}</text>
+          <view wx:if="{{videoPath}}" class="media-content">
+            <video class="media-video" src="{{videoPath}}" controls muted show-fullscreen-btn="{{false}}" show-center-play-btn object-fit="contain"></video>
+          </view>
+          <view wx:else class="media-placeholder">{{texts.videoEmpty}}</view>
+        </view>
+      </view>
+
+      <button class="action-btn primary" bindtap="submitVideoTask" loading="{{videoLoading}}">{{texts.startAnalyze}}</button>
+
+      <view wx:if="{{videoStatus === 'processing'}}" class="progress-area">
+        <progress percent="{{videoProgress}}" stroke-width="8" activeColor="#E86321" />
+        <text class="progress-text">{{videoProgress}}%</text>
+      </view>
+
+      <view wx:if="{{videoStatus === 'completed'}}" class="result-panel">
+        <text class="result-title">{{texts.resultTitle}}</text>
+        <video wx:if="{{videoResultUrl}}" id="highlightVideo" class="result-video" src="{{videoResultUrl}}" controls show-fullscreen-btn show-center-play-btn enable-progress-gesture object-fit="contain" binderror="onResultVideoError"></video>
+        <view wx:if="{{!videoResultUrl}}" class="empty-video">{{texts.resultPreparing}}</view>
+
+        <view class="segment-list">
+          <view wx:for="{{videoSegments}}" wx:key="id" class="segment-item {{activeSegmentIndex === index ? 'active' : ''}}" data-start="{{item.highlightStart}}" data-index="{{index}}" bindtap="onSegmentTap">
+            <view class="segment-time">{{item.sourceStartLabel}}</view>
+            <view class="segment-main">
+              <text class="segment-line">{{texts.segmentPrefix}}{{item.highlightStartLabel}} | {{texts.durationPrefix}}{{item.duration}}s</text>
+              <text class="segment-line sub">{{texts.scorePrefix}}{{item.scorePercent}}% | {{texts.framePrefix}}{{item.frameCount}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{selectedIndex === 2}}" class="premium-card module-card">
+      <view class="module-head">
+        <text class="module-title">{{texts.trajectoryTitle}}</text>
+        <text class="module-desc">{{texts.trajectoryDesc}}</text>
+      </view>
+
+      <view class="row">
+        <button class="action-btn light compact-btn" bindtap="chooseTrajectoryVideo">{{texts.chooseShotVideo}}</button>
+        <text class="status-text">{{trajectoryVideoPath ? texts.shotVideoSelected : texts.shotVideoEmpty}}</text>
+      </view>
+
+      <view wx:if="{{trajectoryVideoPath}}" class="media-content trajectory-media">
+        <video class="media-video" src="{{trajectoryVideoPath}}" controls muted show-fullscreen-btn="{{false}}" show-center-play-btn object-fit="contain"></video>
+      </view>
+
+      <button class="action-btn primary" bindtap="submitTrajectoryTask" loading="{{trajectoryLoading}}">{{texts.startTrajectory}}</button>
+
+      <view wx:if="{{trajectoryStatus === 'processing'}}" class="progress-area">
+        <progress percent="{{trajectoryProgress}}" stroke-width="8" activeColor="#E86321" />
+        <text class="progress-text">{{trajectoryProgress}}%</text>
+        <text class="progress-sub">相位 {{trajectoryLiveState.phase === 'flight' ? '飞行段' : (trajectoryLiveState.phase === 'post_shot' ? '出手后' : '出手前')}} | 滞后 {{trajectoryLiveState.lag_frames || 0}} 帧</text>
+        <text wx:if="{{trajectoryLiveState.lag_frames > 2}}" class="progress-warn">实时性退化：滞后帧持续超过 2 帧</text>
+      </view>
+
+      <view wx:if="{{trajectoryStatus === 'completed'}}" class="result-panel">
+        <text class="result-title">{{texts.trajectoryResult}}</text>
+
+        <view class="prediction-card">
+          <text class="prediction-title">{{texts.shotPredictionTitle}}：{{trajectoryShotView.label}}</text>
+          <text class="prediction-desc">{{trajectoryShotView.detail}}</text>
+        </view>
+
+        <video wx:if="{{trajectoryResultUrl}}" id="trajectoryVideoResult" class="result-video" src="{{trajectoryResultUrl}}" controls show-fullscreen-btn show-center-play-btn enable-progress-gesture object-fit="contain" binderror="onTrajectoryVideoError"></video>
+        <view wx:if="{{!trajectoryResultUrl}}" class="empty-video">{{texts.resultPreparing}}</view>
+
+        <view wx:if="{{trajectoryTracking}}" class="metric-grid">
+          <view class="metric-item"><text class="metric-label">总轨迹点</text><text class="metric-value">{{trajectoryTracking.total_points}}</text></view>
+          <view class="metric-item"><text class="metric-label">检测点</text><text class="metric-value">{{trajectoryTracking.detected_points}}</text></view>
+          <view class="metric-item"><text class="metric-label">预测点</text><text class="metric-value">{{trajectoryTracking.predicted_points}}</text></view>
+          <view class="metric-item"><text class="metric-label">覆盖率</text><text class="metric-value">{{trajectoryTracking.coverage_percent}}%</text></view>
+          <view class="metric-item"><text class="metric-label">拟合点</text><text class="metric-value">{{trajectoryTracking.fit_points_count || 0}}</text></view>
+          <view class="metric-item"><text class="metric-label">P95滞后</text><text class="metric-value">{{trajectoryTracking.p95_lag_frames || 0}} 帧</text></view>
+        </view>
+
+        <view wx:if="{{trajectoryPoints.length > 0}}" class="segment-list">
+          <view wx:for="{{trajectoryPoints}}" wx:key="index" class="segment-item {{activeTrajectoryPointIndex === index ? 'active' : ''}}" data-index="{{index}}" data-time="{{item.time}}" bindtap="onTrajectoryPointTap">
+            <view class="segment-time">{{item.timeLabel}}</view>
+            <view class="segment-main">
+              <text class="segment-line">{{item.kind}}点，X:{{item.x}}，Y:{{item.y}}，帧:{{item.frame}}</text>
+              <text class="segment-line sub">相位 {{item.phaseLabel}} | 滞后 {{item.lagFrames}} 帧 | 速度 {{item.speed}} px/s</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
