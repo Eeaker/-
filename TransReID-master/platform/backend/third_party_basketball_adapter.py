@@ -20,16 +20,25 @@ MODEL_LINKS = {
 
 def _default_repo_path() -> str:
     backend_dir = os.path.dirname(__file__)
-    outer_root_default = os.path.abspath(
-        os.path.join(backend_dir, "..", "..", "..", "_tmp_repo_basketball_analysis")
-    )
-    inner_root_default = os.path.abspath(
-        os.path.join(backend_dir, "..", "..", "_tmp_repo_basketball_analysis")
-    )
-    if os.path.isdir(outer_root_default):
-        default_path = outer_root_default
-    else:
-        default_path = inner_root_default
+    candidates = [
+        os.path.abspath(
+            os.path.join(backend_dir, "..", "..", "..", "third_party", "basketball_analysis")
+        ),
+        os.path.abspath(
+            os.path.join(backend_dir, "..", "..", "third_party", "basketball_analysis")
+        ),
+        os.path.abspath(
+            os.path.join(backend_dir, "..", "..", "..", "_tmp_repo_basketball_analysis")
+        ),
+        os.path.abspath(
+            os.path.join(backend_dir, "..", "..", "_tmp_repo_basketball_analysis")
+        ),
+    ]
+    default_path = candidates[0]
+    for path in candidates:
+        if os.path.isdir(path):
+            default_path = path
+            break
     return os.getenv(
         "BA_REPO_PATH",
         default_path,

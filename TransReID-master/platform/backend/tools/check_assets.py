@@ -30,9 +30,16 @@ def _default_gallery_dir() -> Path:
 
 
 def _default_third_party_repo() -> Path:
-    outer = OUTER_ROOT / "_tmp_repo_basketball_analysis"
-    inner = INNER_ROOT / "_tmp_repo_basketball_analysis"
-    return outer if outer.exists() else inner
+    candidates = [
+        OUTER_ROOT / "third_party" / "basketball_analysis",
+        INNER_ROOT / "third_party" / "basketball_analysis",
+        OUTER_ROOT / "_tmp_repo_basketball_analysis",
+        INNER_ROOT / "_tmp_repo_basketball_analysis",
+    ]
+    for path in candidates:
+        if path.exists():
+            return path
+    return candidates[0]
 
 
 MODEL_LINKS = {
@@ -154,4 +161,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

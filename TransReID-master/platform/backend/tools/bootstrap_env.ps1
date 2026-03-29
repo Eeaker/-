@@ -19,7 +19,12 @@ if (-not $env:REID_SINGLE_WEIGHT_PATH) {
     $env:REID_SINGLE_WEIGHT_PATH = Join-Path $ProjectRoot "logs\92.6\transformer_120.pth"
 }
 if (-not $env:BA_REPO_PATH) {
-    $env:BA_REPO_PATH = Join-Path $OuterRoot "_tmp_repo_basketball_analysis"
+    $submodulePath = Join-Path $OuterRoot "third_party\basketball_analysis"
+    if (Test-Path $submodulePath) {
+        $env:BA_REPO_PATH = $submodulePath
+    } else {
+        $env:BA_REPO_PATH = Join-Path $OuterRoot "_tmp_repo_basketball_analysis"
+    }
 }
 
 Write-Host "== BallShow bootstrap ==" -ForegroundColor Cyan
@@ -47,4 +52,3 @@ if ($RunAssetCheck) {
 Write-Host ""
 Write-Host "Done. Start backend with:" -ForegroundColor Green
 Write-Host "  conda run -n $CondaEnv python $BackendDir\app.py"
-

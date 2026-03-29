@@ -13,7 +13,12 @@ This repository uses a unified entry for analysis:
 cd C:\Users\23159\Downloads\TransReID-master
 ```
 
-### 2) Run bootstrap script
+### 2) Pull submodule
+```powershell
+git submodule update --init --recursive
+```
+
+### 3) Run bootstrap script
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\TransReID-master\platform\backend\tools\bootstrap_env.ps1 -CondaEnv deepstudy -InstallDeps
 ```
@@ -26,7 +31,7 @@ What it does:
 - Initializes runtime upload directories
 - Runs asset checks (`tools/check_assets.py`)
 
-### 3) Start backend
+### 4) Start backend
 ```powershell
 conda run -n deepstudy python .\TransReID-master\platform\backend\app.py
 ```
@@ -51,9 +56,9 @@ Required:
   - default: `data\BallShow\bounding_box_test`
 
 Optional (recommended):
-- YOLO model files in `TransReID-master\platform\backend\`
-- Third-party basketball repo in `_tmp_repo_basketball_analysis`
-- Third-party models in `_tmp_repo_basketball_analysis\models\`
+- YOLO model files in `TransReID-master\platform\backend\` (small runtime models are now committed)
+- Third-party basketball repo (tracked as submodule): `third_party\basketball_analysis`
+- Third-party models in `_tmp_repo_basketball_analysis\models\` (or custom `BA_REPO_PATH`)
 
 ---
 
@@ -67,6 +72,14 @@ Current practical constraints:
   - `transformer_120.pth` ~455MB
   - `court_keypoint_detector.pt` ~418MB
   - other `.pt` files ~170MB+
+
+Current status in this repo:
+- Uploaded:
+  - `yolo11l.pt`, `yolo11m.pt`, `yolo11s-pose.pt`, `yolov8n.pt`
+  - third-party code via submodule `third_party/basketball_analysis`
+- Not uploaded (too large for normal Git):
+  - `logs/92.6/transformer_120.pth`
+  - third-party heavy models under `_tmp_repo_basketball_analysis/models/`
 
 Recommended strategy:
 1. Keep code in Git (already done).
@@ -94,4 +107,3 @@ Why:
 - avoids breaking old clients/scripts
 - avoids duplicated logic
 - keeps one source of truth for future improvements
-
