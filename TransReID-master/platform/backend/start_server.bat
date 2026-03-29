@@ -10,7 +10,11 @@ if "%YOLO_CONFIG_DIR%"=="" (
 )
 
 if "%REID_SINGLE_WEIGHT_PATH%"=="" (
-    set "REID_SINGLE_WEIGHT_PATH=C:\Users\23159\Downloads\TransReID-master\TransReID-master\logs\92.6\transformer_120.pth"
+    set "REID_SINGLE_WEIGHT_PATH=%~dp0..\..\logs\92.6\transformer_120.pth"
+)
+
+if "%BA_REPO_PATH%"=="" (
+    set "BA_REPO_PATH=%~dp0..\..\..\_tmp_repo_basketball_analysis"
 )
 
 if not exist "%YOLO_CONFIG_DIR%" (

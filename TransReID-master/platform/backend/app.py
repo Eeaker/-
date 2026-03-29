@@ -40,7 +40,11 @@ from backend.routes.video_routes import router as video_router
 
 
 CONFIG_PATH = os.path.join(TRANSREID_ROOT, "configs", "BallShow", "vit_transreid_4090.yml")
-REID_WEIGHT_PATH = r"C:\Users\23159\Downloads\TransReID-master\TransReID-master\logs\92.6\transformer_120.pth"
+DEFAULT_REID_WEIGHT_PATH = os.path.join(TRANSREID_ROOT, "logs", "92.6", "transformer_120.pth")
+_weight_hint = os.getenv("REID_SINGLE_WEIGHT_PATH", DEFAULT_REID_WEIGHT_PATH).strip()
+REID_WEIGHT_PATH = _weight_hint if os.path.isabs(_weight_hint) else os.path.abspath(
+    os.path.join(TRANSREID_ROOT, _weight_hint)
+)
 GALLERY_DIR = os.path.join(TRANSREID_ROOT, "..", "data", "BallShow", "bounding_box_test")
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
