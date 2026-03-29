@@ -654,14 +654,15 @@ def process_game_analysis_video(
     if enable_trajectory:
         # Fast defaults for unified game-analysis tasks (avoid hour-level latency).
         ga_traj_fast = str(os.getenv("GA_TRAJECTORY_FAST", "1")).strip().lower() not in {"0", "false", "off", "no"}
+        traj_fast_model = "yolo11n.pt" if os.path.exists(os.path.join(os.path.dirname(__file__), "yolo11n.pt")) else "yolo11m.pt"
         if ga_traj_fast and duration_s >= 60.0:
-            os.environ.setdefault("TRAJ_BALL_MODEL", "yolo11n.pt")
+            os.environ.setdefault("TRAJ_BALL_MODEL", traj_fast_model)
             os.environ.setdefault("TRAJ_YOLO_IMGSZ", "448")
             os.environ.setdefault("TRAJ_POSE_IMGSZ", "320")
             os.environ.setdefault("TRAJ_POSE_STRIDE", "6")
             os.environ.setdefault("TRAJ_DET_STRIDE", "4")
         elif ga_traj_fast and duration_s >= 45.0:
-            os.environ.setdefault("TRAJ_BALL_MODEL", "yolo11n.pt")
+            os.environ.setdefault("TRAJ_BALL_MODEL", traj_fast_model)
             os.environ.setdefault("TRAJ_YOLO_IMGSZ", "512")
             os.environ.setdefault("TRAJ_POSE_IMGSZ", "384")
             os.environ.setdefault("TRAJ_POSE_STRIDE", "4")

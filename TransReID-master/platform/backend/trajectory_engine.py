@@ -128,7 +128,8 @@ class YOLOBallDetector(BallDetector):
         try:
             from ultralytics import YOLO  # type: ignore
 
-            model_to_load = model_path if os.path.exists(model_path) else "yolo11l.pt"
+            fallback_model = os.path.join(os.path.dirname(__file__), "yolo11l.pt")
+            model_to_load = model_path if os.path.exists(model_path) else fallback_model
             self._model = YOLO(model_to_load)
         except Exception as exc:  # pragma: no cover
             self._error = str(exc)
